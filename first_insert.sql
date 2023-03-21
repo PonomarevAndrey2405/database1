@@ -30,15 +30,15 @@ VALUES('Marie', 1940),
 	('Thriller', 1982),
 	('Volks-Hymne', 1837),
 	('The Miracle', 1989),
-	('Gangstas Paradise', 1995),
+	('Gangstas Paradise', 2019),
 	('Alte Gesamt-Ausgabe', 1978),
 	('Atom Heart Mother', 1970),
-	('Close to You', 1957);
+	('Close to You', 1957),
+	('London 1966-1967', 2020);
 
-INSERT INTO Альбом(название, дата_выхода)
-VALUES('London 1966-1967', 2018);
-
-
+UPDATE Альбом
+SET дата_выхода = 2018
+WHERE id = 2;
 	
 INSERT INTO Альбомы_исполнителей(id_исполнителя, id_альбома)
 VALUES(1, 1),
@@ -48,13 +48,9 @@ VALUES(1, 1),
 	(5, 5),
 	(6, 6),
 	(7, 7),
-	(8, 8);
-
-INSERT INTO Альбомы_исполнителей(id_исполнителя, id_альбома)
-VALUES(3, 18),
-	(6, 18);
-
-
+	(8, 8),
+	(4, 9),
+	(6, 9);
 	
 INSERT INTO Треки(id_альбома, название_трека, длина_трека)
 VALUES(1, 'Angel', 224),
@@ -72,10 +68,8 @@ VALUES(1, 'Angel', 224),
 	(7, 'Fat Old Sun', 323),
 	(7, 'If', 270),
 	(8, 'Close to You', 217),
-	(8, 'Love Locket Out', 162);
-
-INSERT INTO Треки(id_альбома, название_трека, длина_трека)
-VALUES(18, 'Piano Sonata', 231);
+	(8, 'Love Locket Out', 162),
+	(9, 'Piano Sonata', 231);
 	
 INSERT INTO Сборники(название_сборника, год_выпуска)
 VALUES('Сборник классики', 2012),
@@ -85,13 +79,8 @@ VALUES('Сборник классики', 2012),
 	('Сборник Rock', 1998),
 	('Сборник Jazz', 2001),
 	('Сборник Pop', 1991),
-	('Сборник Лучшее', 2012);
+	('Сборник Лучшее', 2019);
 
-UPDATE Сборники
-SET год_выпуска = 2019
-WHERE id = 8;
-
-	
 INSERT INTO Сборники_треков(id_сборника, id_трека)
 VALUES(1, 5),
 	(1, 11),
@@ -110,12 +99,3 @@ VALUES(1, 5),
 	(8, 6),
 	(8, 8),
 	(8, 15);
-	
-UPDATE Альбом
-SET дата_выхода = 2019
-WHERE id = 5;
-
-UPDATE Альбом
-SET дата_выхода = 2020
-WHERE id = 18;
-

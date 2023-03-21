@@ -14,4 +14,4 @@ SELECT имя FROM Исполнители
 WHERE имя NOT LIKE '% %';
 
 SELECT название_трека FROM Треки
-WHERE LOWER(название_трека) LIKE '%my%' OR LOWER(название_трека) LIKE '%мой%'; 
+WHERE LOWER(название_трека) LIKE '%my%' OR LOWER(название_трека) LIKE '%мой%';

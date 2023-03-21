@@ -25,13 +25,12 @@ JOIN Альбомы_исполнителей аи ON аи.id_альбома = а
 JOIN Исполнители и ON и.id = аи.id_исполнителя
 WHERE и.имя = 'Queen';
 
-SELECT а.название, COUNT(ж.название_жанра) FROM Альбом а
+SELECT DISTINCT а.название, аи.id_исполнителя FROM Альбом а
 JOIN Альбомы_исполнителей аи ON аи.id_альбома = а.id
 JOIN Исполнители и ON и.id = аи.id_исполнителя
 JOIN Жанры_исполнителей жи ON жи.id_исполнителя = и.id
-JOIN Жанр ж ON ж.id = жи.id_жанра
-GROUP BY а.название
-HAVING COUNT(ж.название_жанра) > 1;
+GROUP BY а.название, аи.id_исполнителя
+HAVING COUNT(жи.id_жанра) > 1;
 
 SELECT т.название_трека FROM Треки т
 LEFT JOIN Сборники_треков ст ON ст.id_трека = т.id
@@ -43,10 +42,11 @@ JOIN Альбомы_исполнителей аи ON аи.id_альбома = а
 JOIN Исполнители и ON аи.id_исполнителя = и.id
 WHERE длина_трека = (SELECT MIN(длина_трека) FROM Треки);
 
-SELECT DISTINCT название н FROM Альбом а
-LEFT JOIN Треки т ON т.id_альбома = а.id
-WHERE т.id_альбома IN(SELECT id_альбома FROM Треки
-	GROUP BY id_альбома
-	HAVING COUNT(id_альбома) = (SELECT COUNT(id) FROM Треки
-		GROUP BY id_альбома
-		ORDER BY COUNT LIMIT 1));
+SELECT название н FROM Альбом а
+JOIN Треки т ON т.id_альбома = а.id
+GROUP BY а.название, а.id
+HAVING COUNT(т.id) = (SELECT COUNT(т.id) FROM Треки
+	JOIN Треки т ON т.id_альбома = а.id
+	GROUP BY а.название
+	ORDER BY COUNT(т.id)
+	LIMIT 1);
